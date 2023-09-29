@@ -65,10 +65,11 @@ server.post("/login", async (req, res) => {
   } else if (req.body.password !== data[0].password) {
     message["return"] = "Wrong password!";
   } else {
+    console.log(data);
     message["return"] = "OK";
-    message["creation_date"] = new Date();
-    message["user"] = req.body.name;
-    message["cookie_id"] = "some random generated string!";
+    message["login_date"] = new Date();
+    message["user"] = req.body.emp_id;
+    message["email"] = data[0].email;
   }
   res.json(message);
 });
@@ -87,7 +88,8 @@ server.post("/register", async (req, res) => {
     message["return"] = "User saved. Logging In Automatically!";
     message["creation_date"] = new Date();
     message["user"] = req.body.emp_id;
-    message["cookie_id"] = "some random generated string!";
+    message["email"] = data.email;
+    // message["cookie_id"] = "some random generated string!";
   }
   res.json(message);
 });
